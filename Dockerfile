@@ -1,7 +1,7 @@
 FROM ghcr.io/nforceroh/alpine-base:3.24
 
 ARG \
-  BUILD_DATE=unknown \
+  BUILD_DATE=now \
   VERSION=unknown
 
 LABEL \
@@ -21,10 +21,10 @@ ENV \
 ### Install Dependencies
 RUN apk update \
     && apk upgrade \
-    && apk add --no-cache bash ca-certificates dcc dcc-dccifd dcc-extras\
- ## Cleanup
+    && apk add --no-cache bash ca-certificates dcc dcc-dccifd dcc-extras \
     && rm -rf /var/cache/apk/* /usr/src/*
 
+### Add Files
 ADD --chmod=755 /content/etc/s6-overlay /etc/s6-overlay
 ADD --chown=dcc:dcc content/var/dcc /var/dcc
 
